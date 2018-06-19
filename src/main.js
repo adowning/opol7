@@ -1,11 +1,11 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import { firebase } from './components/firebaseInit'
+import { firebase } from './core/firebaseInit'
 import Vue from 'vue'
-import App from './App'
-import router from './router/routes'
+import App from './core/App'
+import router from './core/routes'
 import Vuetify from 'vuetify'
-import store from './store/store'
+import store from './core/store'
 // import firebase from 'firebase';
 import firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'

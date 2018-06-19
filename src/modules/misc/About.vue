@@ -1,6 +1,6 @@
 <template>
     <v-card color="tile" tile class="pa-4">
-        <img src="../assets/images/seal.png">             
+        <img src="../../assets/images/seal.png">             
         <h1>About EloCute</h1> 
         <p align="left">EloCute is a way for language, linguistics, and speech teachers to help their students perfect their spoken mastery of a language. A teacher can use this web site 
         to create a virtual 'classroom' with students associated to it. The students are invited to login to their classroom in the EloCute companion mobile app for iOS and Android,

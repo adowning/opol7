@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '@/components/Home';
-import About from '@/components/About';
-import Auth from '@/components/Auth';
-import TeacherHome from '@/components/TeacherHome';
-import ClassroomHome from '@/components/ClassroomHome';
-import AssignmentHome from '@/components/AssignmentHome';
-import StudentHome from '@/components/StudentHome';
-import NewHardware from '@/components/FormHardware';
+import Home from '../core/Home';
+// import About from '@/components/About';
+import Auth from '../core/Auth';
+import TeacherHome from '../modules/misc/TeacherHome';
+import ClassroomHome from '../modules/misc/ClassroomHome';
+import AssignmentHome from '../modules/misc/AssignmentHome';
+import StudentHome from '../modules/misc/StudentHome';
+import NewHardware from '../modules/equipment/FormHardware';
 
-import { store } from '@/store/store';
+import { store } from '../core/store';
 
 import firebase from 'firebase';
 

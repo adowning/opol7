@@ -27,7 +27,7 @@
             <v-toolbar-side-icon
                 @click.stop="sideNav = !sideNav"/>
             <!-- <router-link to="/"><img src="./assets/images/seal.png" height="50px"></router-link> -->
-            <router-link to="/newhardware"><img src="./assets/images/seal.png" height="50px"></router-link>
+            <router-link to="/newhardware"><img src="../assets/images/seal.png" height="50px"></router-link>
 
             <v-toolbar-title>EloCute: For Language Teachers and Students</v-toolbar-title>
         </v-toolbar>
@@ -68,5 +68,5 @@ export default {
 </script>
 
 <style lang="stylus">
-@require './stylus/main';
+@require '../assets/stylus/main.styl';
 </style>

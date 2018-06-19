@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "sudo fuser -k 8080/tcp && vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "sudo fuser -k 8080/tcp && NODE_ENV=DEV vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron src/app.js"
@@ -11,6 +11,7 @@
   "dependencies": {
     "electron": "^2.0.2",
     "firebase": "^5.0.4",
+    "firebaseui": "^3.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.16",

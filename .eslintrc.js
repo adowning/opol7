@@ -1,4 +1,6 @@
 {
+  [
+ 
   "plugins": ["vue", "flowtype", "flowtype-errors"],
   "env": {
     "browser": true,
@@ -51,4 +53,5 @@
     "object-curly-newline": ["error", { "consistent": true }],
     "semi": ["warn", "never"]
   }
+]
 }

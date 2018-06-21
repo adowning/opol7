@@ -1,37 +1,46 @@
-<template>
-  <v-app>
+<template v-if="user">
+  <v-app id="root" dark>
     <notifications position="bottom right" group="all" />
-    <v-speed-dial v-if="$_isAuthenticated" v-model="fab" :top="top" :hover="hover" :fixed="fixed" :bottom="bottom" :right="right" :left="left" :direction="direction" :open-on-hover="hover" :transition="transition">
-      <v-btn slot="activator" v-model="fab" color="vueblue" large dark fab>
-        <v-icon>account_circle</v-icon>
-        <v-icon>close</v-icon>
+    <sidenav />
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+    <v-snackbar
+      :timeout="6000"
+      :color="message.color"
+      :bottom="true"
+      v-model="message.visible"
+    >
+      <v-icon dark class="mr-2">{{ message.icon }}</v-icon>
+      {{ message.text }}
+      <v-btn dark flat @click.native="message.visible = false">
+        <v-icon dark right>close</v-icon>
       </v-btn>
-      <v-btn fab dark color="green">
-        <v-icon>edit</v-icon>
-      </v-btn>
-      <v-btn fab dark color="indigo">
-        <v-icon>add</v-icon>
-      </v-btn>
-      <v-btn fab dark @click.native="logOutUser()" color="red">
-        <v-icon>delete</v-icon>
-      </v-btn>
-    </v-speed-dial>
-    <user-layout v-if="$_isAuthenticated" />
-    <guest-layout v-if="!$_isAuthenticated" />
-  
+    </v-snackbar>
+    <afooter />
   </v-app>
 </template>
-
+<template v-else>
+<v-app id="root" light>
+   <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
+</template>
 <script>
-import UserLayout from "./layout/UserLayout";
-import GuestLayout from "./layout/GuestLayout";
-import { Auth } from "aws-amplify";
+ import SideNav from "./layout/SideNav"
+//  import ComsPanel from "./layout/ComsPanel";
+ import AFooter from "./layout/AFooter"
+ import StatusWidget from "./layout/StatusWidget"
+import { mapGetters } from 'vuex'
 
 export default {
   name: "App",
   components: {
-    "user-layout": UserLayout,
-    "guest-layout": GuestLayout
+    "sidenav": SideNav,
+    "afooter": AFooter,
+    "statuswidget": StatusWidget,
+    // "comspanel": GuestLayout
     // "fab": Fab
   },
   data() {
@@ -47,25 +56,34 @@ export default {
       bottom: true,
       left: false,
       transition: "slide-y-reverse-transition"
-    };
+    }
   },
+      computed: {
+      ...mapGetters({
+        message: 'common/message',
+        user: 'common/user'
+      }),
+
+      },
+      mounted () {
+          console.log(this.user)
+      },
   methods: {
-    // eslint-disable-next-line
-    /* eslint-disable */
+
     async logOutUser() {
       try {
-        const data = await Auth.signOut();
-        console.log(data);
-        this.$store.dispatch("auth/end", null);
+        const data = await Auth.signOut()
+        console.log(data)
+        this.$store.dispatch("auth/end", null)
         // this.$store.dispatch("auth/setUser", null);
         // this.$store.dispatch("auth/setUserId", null);
         // this.$store.dispatch("profile/setProfile", null)
         // this.$store.dispatch('timeclocks/setClocks', null)
-        this.$router.replace("/auth/signIn");
+        this.$router.replace("/auth/signIn")
       } catch (err) {
-        console.log(err);
-        console.log(err);
-        this.fireNotify(this.error);
+        console.log(err)
+        console.log(err)
+        this.fireNotify(this.error)
       }
     },
 
@@ -73,10 +91,10 @@ export default {
       // alert('Clicked on alert icon');
     }
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
 .speed-dial--bottom:not(.speed-dial--absolute) {
   bottom: 40%;
   right: 5px;
@@ -95,14 +113,17 @@ export default {
   color: #ffffff;
   background: #44a4fc;
   border-left: 5px solid #187fe7;
+
   &.warn {
     background: #ffb648;
     border-left-color: #f48a06;
   }
+
   &.error {
     background: #e54d42;
     border-left-color: #b82e24;
   }
+
   &.success {
     background: #68cd86;
     border-left-color: #42a85f;

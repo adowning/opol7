@@ -1,10 +1,15 @@
 <template>
-  <div class="google-map" ref="mapRef" :id="mapName"></div>
+  <div ref="mapRef" :id="mapName" class="google-map"></div>
 </template>
 <script>
 export default {
-    name: 'google-map',
-    props: [ 'name' ],
+    name: 'GoogleMap',
+         props: {
+         name: {
+      type: String,
+      default: null,
+    }
+  },
     data: function() {
         return {
             mapName: `${this.name }-map`,

@@ -1,14 +1,14 @@
 <template lang="html">
-    <div>
-        <div id="firebaseui-auth-container"/>
-    </div>
+  <div>
+    <div id="firebaseui-auth-container"/>
+  </div>
 </template>
 <script>
 import firebase from 'firebase'
 import firebaseui from 'firebaseui'
-
+console.log(process.env.NODE_ENV)
 export default {
-  name: 'auth',
+  name: 'Auth',
   mounted() {
     const uiConfig = {
       signInSuccessUrl: 'home',

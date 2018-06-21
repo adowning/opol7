@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "firebase-admin": "~5.12.1",
-    "firebase-functions": "^1.0.3"
+    "firebase-functions": "^1.0.3",
+    "algoliasearch": "^3.24.5",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

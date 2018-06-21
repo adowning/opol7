@@ -1,10 +1,10 @@
 <template>
-  <div id='map'>
-    <p id='latLng'>Lat: {{lat}} Lng: {{lng}}</p>
-    <form id='mapType'>
+  <div id="map">
+    <p id="latLng">Lat: {{ lat }} Lng: {{ lng }}</p>
+    <form id="mapType">
       <label>Change Map Type</label>
-      <input type='radio' name='mapType' value='default' v-model='mapType' v-on:change='changeMapType' /> Default <br />
-      <input type='radio' name='mapType' value='satellite' v-model='mapType' v-on:change='changeMapType' /> Satellite <br />
+      <input v-model="mapType" type="radio" name="mapType" value="default" @change="changeMapType" /> Default <br />
+      <input v-model="mapType" type="radio" name="mapType" value="satellite" @change="changeMapType" /> Satellite <br />
     </form>
   </div>
 </template>

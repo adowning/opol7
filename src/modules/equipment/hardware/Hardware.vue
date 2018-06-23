@@ -118,6 +118,7 @@ export default {
     }
   },
   computed: {
+    //asdf
     ...mapGetters({
       hardwares: 'hardware/hardwares',
       totalNumberOfHardwares: 'hardware/totalNumberOfHardwares',

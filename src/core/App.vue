@@ -33,7 +33,7 @@
  import AFooter from "./layout/AFooter"
  import StatusWidget from "./layout/StatusWidget"
 import { mapGetters } from 'vuex'
-
+//remove
 export default {
   name: "App",
   components: {

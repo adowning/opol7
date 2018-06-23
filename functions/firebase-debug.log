@@ -1,0 +1,43 @@
+[debug] [2018-06-23T08:14:04.362Z] ----------------------------------------------------------------------
+[debug] [2018-06-23T08:14:04.364Z] Command:       /home/ash/.nvm/versions/node/v8.11.3/bin/node /home/ash/.nvm/versions/node/v8.11.3/bin/firebase serve --only functions --host 0.0.0.0 --port 8080
+[debug] [2018-06-23T08:14:04.364Z] CLI Version:   3.18.6
+[debug] [2018-06-23T08:14:04.364Z] Platform:      linux
+[debug] [2018-06-23T08:14:04.364Z] Node Version:  v8.11.3
+[debug] [2018-06-23T08:14:04.364Z] Time:          Sat Jun 23 2018 03:14:04 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:04.364Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-06-23T08:14:04.375Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-23T08:14:04.375Z] > authorizing via signed-in user
+[debug] [2018-06-23T08:14:04.376Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-06-23T08:14:04.377Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/ILM65PyObCHOP4-6pOJ51OSrLvnvqP46KKVINl3iGGsKhhaiIQOTSDvi3U7CKVVO',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat Jun 23 2018 03:14:04 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:04.538Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-23T08:14:04.551Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/opol6-dev  
+  
+ Sat Jun 23 2018 03:14:04 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:04.988Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-23T08:14:04.989Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/opol6-dev/tokens  
+  
+ Sat Jun 23 2018 03:14:04 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:05.421Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-23T08:14:05.423Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/opol6-dev  
+  
+ Sat Jun 23 2018 03:14:05 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:05.664Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/ash/opol7'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-06-23T08:14:06.222Z] Fetching environment
+[debug] [2018-06-23T08:14:06.225Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/258468941701:getServerAppConfig  
+  
+ Sat Jun 23 2018 03:14:06 GMT-0500 (CDT)
+[debug] [2018-06-23T08:14:06.556Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-23T08:14:06.556Z] Starting @google-cloud/functions-emulator
+[debug] [2018-06-23T08:14:07.600Z] Parsing function triggers
+[info] ✔  functions: locationUpdate: http://0.0.0.0:8080/opol6-dev/us-central1/locationUpdate

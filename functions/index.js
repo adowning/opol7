@@ -9,6 +9,92 @@ exports.countCreateProduct = stats.countCreateProduct
 exports.countDeleteProduct = stats.countDeleteProduct
 exports.countCreateHardware = stats_hardware.countCreateHardware
 exports.countDeleteHardware = stats_hardware.countDeleteHardware
+
+exports.locationUpdate = functions.https.onRequest((req, res) => {
+  console.info(req.body)
+  console.log(functions.config())
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1)
+    return s4() + s4()
+  }
+  switch (req.body.action) {
+    //sets the tablet id not the user
+    case 'auth': {
+      console.log(req.body)
+      let tid = req.body.user + '_' + admin.database.ServerValue.TIMESTAMP
+      // res.send({ error: false, trackid: tid })
+      res.send({ error: false })
+      break
+    }
+    case 'addtrack': {
+      console.log(req.body)
+      // let tid = req.body.track + '_' + admin.database.ServerValue.TIMESTAMP
+      let tid = s4()
+      // let tid = req.body.user + '_' + admin.database.ServerValue.TIMESTAMP
+      res.send({ error: false, trackid: tid })
+      break
+    }
+    case 'addpos':
+      console.log('addpos trackid = ', req.body.trackid)
+      // res.send({ error: false, trackid: 1 })
+      res.send({ error: false })
+      break
+
+    default: {
+      console.log('no action')
+      res.send({ error: true, errormsg: 'noaction' })
+      break
+    }
+    // res.send({ error: false })
+    // console.log('req inc')
+  }
+})
+
+const winston = require('winston')
+const util = require('util')
+const ClassicConsoleLoggerTransport = (winston.transports.CustomLogger = function(
+  options
+) {
+  options = options || {}
+  this.name = 'ClassicConsoleLoggerTransport'
+  this.level = options.level || 'info'
+  // Configure your storage backing as you see fit
+})
+util.inherits(ClassicConsoleLoggerTransport, winston.Transport)
+
+ClassicConsoleLoggerTransport.prototype.log = function(
+  level,
+  msg,
+  meta,
+  callback
+) {
+  let args = [msg, '---', meta]
+  switch (level) {
+    case 'verbose':
+    case 'debug':
+      console.log.apply(null, args)
+      break
+    case 'notice':
+    case 'info':
+      console.info.apply(null, args)
+      break
+    case 'warn':
+    case 'warning':
+      console.warn.apply(null, args)
+      break
+    case 'error':
+    case 'crit':
+    case 'alert':
+    case 'emerg':
+      console.error.apply(null, args)
+      break
+    default:
+      console.log.apply(null, args)
+  }
+  callback(null, true)
+}
 // exports.algoliaProductCreated = algolia.algoliaProductCreated
 // exports.getSearchKey = algolia.getSearchKey
 // // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.

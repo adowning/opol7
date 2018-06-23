@@ -10,11 +10,12 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "~5.12.1",
-    "firebase-functions": "^1.0.3",
     "algoliasearch": "^3.24.5",
     "cors": "^2.8.4",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "firebase-admin": "~5.12.1",
+    "firebase-functions": "^1.0.3",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

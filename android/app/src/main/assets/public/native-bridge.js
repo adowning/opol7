@@ -1,5 +1,5 @@
 //# sourceURL=capacitor-runtime.js
-
+/* eslint-disable */
 (function(win) {
   win.Capacitor = win.Capacitor || {
     Plugins: {}
@@ -14,7 +14,7 @@
   addLegacyHandlers(win)
 
   capacitor.Plugins = capacitor.Plugins || {}
-  
+
   capacitor.DEBUG = typeof capacitor.DEBUG === 'undefined' ? true : capacitor.DEBUG
 
   // keep a collection of callbacks for native response data
@@ -296,12 +296,12 @@
     if(!errorModal) {
       errorModal = makeErrorModal(error)
     }
-      
+
     errorModal.style.display = 'block'
     updateErrorModal(error)
   }
- 
- 
+
+
   capacitor.handleWindowError = function (msg, url, lineNo, columnNo, error) {
     var string = msg.toLowerCase()
     var substring = "script error"
@@ -577,6 +577,7 @@
       // Remove the big long iOS path
       if(atIndex >= 0 && appIndex >= 0) {
         //var badSubstr = line.substring(atIndex, appIndex + 5);
+        /* eslint-disable */
         line = '<b>' + line.substring(0, atIndex) + '</b>' + '@' + line.substring(appIndex + 5)
       }
       return line

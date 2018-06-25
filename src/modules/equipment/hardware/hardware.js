@@ -1,5 +1,4 @@
 // import * as db from '../../../core/firebaseInit'
-import firebase from 'firebase'
 import _ from 'lodash'
 // import db from '../../../main'
 import * as db from '../../../firebase'

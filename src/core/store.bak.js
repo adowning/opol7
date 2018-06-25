@@ -1,7 +1,7 @@
 export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 // import { VuetronVuex } from 'vuetron'
 import hardware from '../modules/equipment/hardware/hardware'
 Vue.use(Vuex)

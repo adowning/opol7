@@ -23,26 +23,30 @@ let router = new Router({
       path: '/',
       name: 'landing',
       component: Home,
+      meta: { isLanding: true },
     },
     {
       path: '/hardware',
       name: 'Hardware',
       component: Hardware,
+      meta: { requiresAuth: true },
     },
     {
       path: '/hardware/new',
       name: 'NewHardware',
       component: NewHardware,
+      meta: { requiresAuth: true },
     },
     {
       path: '/hardware/:id/edit',
       name: 'EditHardware',
       component: EditHardware,
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile,
+      meta: { requiresAuth: true },
     },
     {
       path: '/newhardware',
@@ -54,11 +58,11 @@ let router = new Router({
     //   name: 'about',
     //   component: About,
     // },
-    {
-      path: '/auth',
-      name: 'login',
-      component: Auth,
-    },
+    // {
+    //   path: '/auth',
+    //   name: 'login',
+    //   component: Auth,
+    // },
     // {
     //   path: '/home',
     //   name: 'home',
@@ -85,19 +89,27 @@ let router = new Router({
     // },
     {
       path: '*',
-      name: 'Auth',
-      component: Auth,
+      name: 'landing',
+      component: Home,
+      meta: { isLanding: true },
     },
   ],
 })
 router.beforeEach((to, from, next) => {
-  // let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  console.log(to)
-  if (!store.state.user) {
-    console.log(store.state.user)
-  }
-  // if (requiresAuth && !store.state.user) next('auth')
-  // else next()
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  // console.log(store.state)
+  // console.log(store.state.common.isLoggedIn)
+  // console.log(store.state['common/user'])
+  console.log(to.name)
+
+  if (
+    store.state.common.isLoggedIn &&
+    to.matched.some(record => record.meta.isLanding)
+  )
+    next('profile')
+  if (requiresAuth && !store.state.common.isLoggedIn) next('landing')
+  else next()
+
   next()
 })
 export default router

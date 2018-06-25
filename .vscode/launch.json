@@ -2,36 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Simulate android|ios in browser",
-      "type": "cordova",
-      "request": "launch",
-      "platform": "android|ios",
-      "target": "chrome",
-      "simulatePort": 8000,
-      "livereload": true,
-      "cwd": "${workspaceRoot}",
-      "sourceMaps": true
-    },
-    {
-      "name": "Serve to the browser (ionic serve)",
-      "type": "cordova",
-      "request": "launch",
-      "platform": "serve",
-      "devServerAddress": "localhost",
-      "sourceMaps": true,
-      "ionicLiveReload": true,
-      "cwd": "${workspaceRoot}"
-    },
-    {
-      "name": "Run android|ios on device|emulator",
-      "type": "cordova",
-      "request": "launch",
-      "platform": "android|ios",
-      "target": "device|emulator",
-      "sourceMaps": true,
-      "cwd": "${workspaceRoot}/android"
-    },
-    {
       "type": "chrome",
       "request": "launch",
       "name": "vuejs: chrome",

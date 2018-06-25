@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import * as types from '../../mutation-types'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import router from '../../../router'
 import { onReject } from './utils'
 import * as getters from './getters'

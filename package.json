@@ -13,10 +13,13 @@
     "@capacitor/cli": "^1.0.0-beta.0",
     "@capacitor/core": "^1.0.0-beta.0",
     "@firebase/firestore": "^0.5.4",
+    "cordova-plugin-mauron85-background-geolocation": "^3.0.0-alpha.37",
+    "dotenv": "^6.0.0",
     "electron": "^2.0.2",
     "eslint": "^4.19.1",
     "firebase": "^5.0.4",
     "firebaseui": "^3.0.0",
+    "sandboxjs": "^4.2.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.16",
@@ -36,7 +39,6 @@
     "lint-staged": "^6.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.3",
-    "vue-devtools": "^4.1.4",
     "vue-template-compiler": "^2.5.16"
   },
   "browserslist": [

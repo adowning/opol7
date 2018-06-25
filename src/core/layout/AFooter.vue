@@ -3,7 +3,7 @@
 
     <v-spacer/>
     <v-spacer/>
-    {{ p }} {{ displayText }}
+    {{ displayText }}
     <i class="material-icons dark">tag_faces</i>
   </v-footer>
 </template>
@@ -19,7 +19,6 @@ const { Geolocation } = Plugins
       currentPage: "",
       src: "../assets/logo.png",
       chatMessages: "",
-      p: '',
     }),
     computed: {
       displayText() {
@@ -33,27 +32,27 @@ const { Geolocation } = Plugins
     },
 
 },
-   mounted() {
-     var vm = this
-     vm.p = 'locating..'
-  async function getCurrentPosition() {
-    const coordinates = await Geolocation.getCurrentPosition()
-  console.log(coordinates)
-  vm.p = coordinates
-  }
- function watchPosition() {
-    const wait = Geolocation.watchPosition({}, (position, err) => {
-      console.log(err)
-      console.log(position)
-     vm.$set(vm.p, position)
+//    mounted() {
+//      var vm = this
+//      vm.p = 'locating..'
+//   async function getCurrentPosition() {
+//     const coordinates = await Geolocation.getCurrentPosition()
+//   console.log(coordinates)
+//   vm.p = coordinates
+//   }
+//  function watchPosition() {
+//     const wait = Geolocation.watchPosition({}, (position, err) => {
+//       console.log(err)
+//       console.log(position)
+//      vm.$set(vm.p, position)
 
-    })
-  }
-getCurrentPosition().then(watchPosition())
+//     })
+//   }
+// getCurrentPosition().then(watchPosition())
 
 
-      this.getPhoto()
-    },
+//       this.getPhoto()
+//     },
     methods: {
       // async logOut() {
       //   try {

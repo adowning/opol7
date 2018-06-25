@@ -44,11 +44,6 @@ export default {
   data () {
       []
   },
-  firestore () {
-    return {
-      locations: db.collection('locations').orderBy('createdAt')
-    }
-}
 }
 </script>
 

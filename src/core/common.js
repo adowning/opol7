@@ -2,10 +2,11 @@ export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 export const SET_USER = 'SET_USER'
 export const SET_ISLOGGEDIN = 'SET_ISLOGGEDIN'
 // import firebase from './firebaseInit'
-import * as db from '../firebase'
-const firebase = db.fb
+// import * as db from '../firebase'
+import { fb, fs } from '../firebase'
+// const firebase = db.fb
 // import firebase from 'firebase'
-import Firebase from 'firebase'
+// import Firebase from 'firebase/app'
 // initial state
 const state = {
   message: {
@@ -15,13 +16,14 @@ const state = {
     color: '',
   },
   user: null,
-  isLoggedIn: false,
+  isLoggedIn: null,
 }
 
 // getters
 const getters = {
   message: state => state.message,
   user: state => state.user,
+  isLoggedIn: state => state.isLoggedIn,
 }
 const mutations = {
   [SHOW_MESSAGE](state, message) {
@@ -40,7 +42,7 @@ const mutations = {
 }
 // actions
 function setupUser() {
-  var user = firebase.auth().currentUser
+  var user = fb.auth().currentUser
 
   user
     .updateProfile({
@@ -62,94 +64,57 @@ const actions = {
     commit(SHOW_MESSAGE, message)
   },
   setUser({ commit }, user) {
+    // fb.database()
+    //   .ref('/.info/serverTimeOffset')
+    //   .once('value')
+    //   .then(
+    //     function stv(data) {},
+    //     function(err) {
+    //       return err
+    //     }
+    //   )
+
     if (user) {
-      commit(SET_ISLOGGEDIN, false)
-      // console.log(firebase)
-      // console.log(user)
+      commit(SET_ISLOGGEDIN, true)
       if (!user.displayName) {
         setupUser()
       }
       commit(SET_USER, user)
+      var isOfflineForDatabase = {
+        state: 'offline',
+        last_changed: fb.database.ServerValue.TIMESTAMP,
+      }
 
-      // since I can connect from multiple devices or browser tabs, we store each connection instance separately
-      // any time that connectionsRef's value is null (i.e. has no children) I am offline
-      var myConnectionsRef = firebase.database().ref('users/joe/connections')
+      var isOnlineForDatabase = {
+        state: 'online',
+        last_changed: fb.database.ServerValue.TIMESTAMP,
+      }
+      var userStatusFirestoreRef = fb.firestore().doc('/status/' + user.uid)
+      var userStatusDatabaseRef = fb.database().ref('/status/' + user.uid)
+      var isOfflineForFirestore = {
+        state: 'offline',
+        last_changed: fb.database.ServerValue.TIMESTAMP,
+      }
 
-      // stores the timestamp of my last disconnect (the last time I was seen online)
-      var lastOnlineRef = firebase.database().ref('users/joe/lastOnline')
-
-      var connectedRef = firebase.database().ref('.info/connected')
-      console.log(Firebase.database.ServerValue.TIMESTAMP)
-
-      connectedRef.on('value', function(snap) {
-        if (snap.val() === true) {
-          // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-          var con = myConnectionsRef.push()
-
-          // When I disconnect, remove this device
-          con.onDisconnect().remove()
-
-          // Add this device to my connections list
-          // this value could contain info about the device or a timestamp too
-          con.set(true)
-          // When I disconnect, update the last time I was seen online
-          lastOnlineRef
+      var isOnlineForFirestore = {
+        state: 'online',
+        last_changed: fb.database.ServerValue.TIMESTAMP,
+      }
+      fb.database()
+        .ref('.info/connected')
+        .on('value', function(snap) {
+          if (snap.val() === true) {
+            userStatusFirestoreRef.set(isOfflineForFirestore)
+            return
+          }
+          userStatusDatabaseRef
             .onDisconnect()
-            .set(Firebase.database.ServerValue.TIMESTAMP)
-        }
-      })
-      //   var isOnlineForDatabase = {
-      //     state: 'online',
-      //     username: user.displayName,
-      //     last_changed: firebase.database().ServerValue.TIMESTAMP,
-      //   }
-
-      //   var isOnlineForFirestore = {
-      //     state: 'online',
-      //     username: user.displayName,
-      //     last_changed: firebase.firestore.FieldValue.serverTimestamp(),
-      //   }
-      //   state.uid = user.uid
-      //   state.username = user.displayName
-      //   state.user = user
-      //   var uid = state.uid
-
-      //   var userStatusDatabaseRef = firebase.database().ref('/status/' + uid)
-      //   // var userStatusDatabaseRef = firebase.database().ref('/status/' + uid)
-      //   var userStatusFirestoreRef = firebase.firestore().doc('/status/' + uid)
-      //   userStatusFirestoreRef.set(isOnlineForFirestore)
-      //   console.log(userStatusDatabaseRef)
-      //   userStatusDatabaseRef.set(isOnlineForDatabase)
-      // } else {
-      //   var isOfflineForDatabase = {
-      //     state: 'offline',
-      //     username: state.username,
-      //     last_changed: firebase.database.ServerValue.TIMESTAMP,
-      //   }
-
-      //   var isOfflineForFirestore = {
-      //     state: 'offline',
-      //     username: state.username,
-      //     last_changed: firebase.firestore.FieldValue.serverTimestamp(),
-      //   }
-
-      //   var uid = state.uid
-      //   console.log(uid)
-      //   if (!uid || uid == 'undefined') {
-      //     return
-      //   }
-      //   var username = state.username
-      //   console.log(username)
-      //   if (!username || username == 'undefined') {
-      //     return
-      //   }
-      //   var userStatusDatabaseRef = firebase.database().ref('/status/' + uid)
-      //   var userStatusFirestoreRef = firebase.firestore().doc('/status/' + uid)
-      //   userStatusFirestoreRef.set(isOfflineForFirestore)
-      //   userStatusDatabaseRef.set(isOfflineForDatabase)
-      //   state.user = null
-      //   state.username = null
-      //   state.uid = null
+            .set(isOfflineForDatabase)
+            .then(function() {
+              userStatusDatabaseRef.set(isOnlineForDatabase)
+              userStatusFirestoreRef.set(isOnlineForFirestore)
+            })
+        })
     } else {
       commit(SET_ISLOGGEDIN, false)
       commit(SET_USER, user)

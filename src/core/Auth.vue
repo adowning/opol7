@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div id="firebaseui-auth-container"/>
-      </div>
+  </div>
 </template>
 <script>
 import firebase from 'firebase/app'

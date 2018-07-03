@@ -2,7 +2,7 @@
 import firebase from 'firebase'
 import _ from 'lodash'
 // import db from '../../../main'
-import * as db from '../../../firebase'
+import * as db from './firebase'
 export const RECEIVE_HARDWARES = 'RECEIVE_HARDWARES'
 export const LOADING_HARDWARES = 'LOADING_HARDWARES'
 export const SELECT_HARDWARES = 'SELECT_HARDWARES'

@@ -1,10 +1,22 @@
-<template v-if="user">
-  <v-app id="root" dark>
-    <notifications position="bottom right" group="all" />
-    <sidenav />
-    <v-content>
-      <router-view></router-view>
-    </v-content>
+<template>
+  <v-app id="root" dark >
+    <!-- <notifications position='bottom right' group='all' /> -->
+
+    <!-- <input type='button' value='Say hello' @click="showAndroidToast('Hello Android!')" /> -->
+
+    <div v-if="!mobile" >
+      <sidenav fill-height app/>
+      <v-content >
+        <router-view></router-view>
+      </v-content>
+      <afooter/>
+    </div>
+    <div v-else>
+      <v-content >
+        <router-view ></router-view>
+      </v-content>
+      <bottomnav/>
+    </div>
     <v-snackbar
       :timeout="6000"
       :color="message.color"
@@ -17,129 +29,156 @@
         <v-icon dark right>close</v-icon>
       </v-btn>
     </v-snackbar>
-    <afooter />
-  </v-app>
-</template>
-<template v-else>
-<v-app id="root" light>
-   <v-content>
-      <router-view></router-view>
-    </v-content>
   </v-app>
 </template>
 <script>
- import SideNav from "./layout/SideNav"
-//  import ComsPanel from "./layout/ComsPanel";
- import AFooter from "./layout/AFooter"
- import StatusWidget from "./layout/StatusWidget"
-import { mapGetters } from 'vuex'
-//remove
+import SideNav from './layout/SideNav'
+//  import ComsPanel from './layout/ComsPanel'
+import AFooter from './layout/AFooter'
+import BottomNav from './layout/BottomNav'
+import StatusWidget from './layout/StatusWidget'
+
+// window.alert(window.location.href)
+function listCookies() {
+  var theCookies = window.document.cookie.split('')
+  var aString = ''
+  for (var i = 1; i <= theCookies.length; i++) {
+    aString += i + ' ' + theCookies[i - 1] + '\n'
+  }
+  return aString
+}
+
+console.log(listCookies())
+// import * as Instascan from '../plugins/instascan.min.js'
+// const Instascan = require('../plugins/instascan.min.js')
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    "sidenav": SideNav,
-    "afooter": AFooter,
-    "statuswidget": StatusWidget,
-    // "comspanel": GuestLayout
-    // "fab": Fab
+    sidenav: SideNav,
+    afooter: AFooter,
+    statuswidget: StatusWidget,
+    bottomnav: BottomNav,
+    // 'fab': Fab
   },
   data() {
     return {
-      direction: "left",
+      direction: 'left',
       fab: false,
       fixed: true,
       fling: true,
       hover: true,
       tabs: null,
+      mobile: true,
       top: false,
       right: true,
       bottom: true,
       left: false,
-      transition: "slide-y-reverse-transition"
+      transition: 'slide-y-reverse-transition',
     }
   },
-      computed: {
-      ...mapGetters({
-        message: 'common/message',
-        user: 'common/user'
-      }),
-
-      },
-      mounted () {
-          console.log(this.user)
-      },
-  methods: {
-
-    async logOutUser() {
-      try {
-        const data = await Auth.signOut()
-        console.log(data)
-        this.$store.dispatch("auth/end", null)
-        // this.$store.dispatch("auth/setUser", null);
-        // this.$store.dispatch("auth/setUserId", null);
-        // this.$store.dispatch("profile/setProfile", null)
-        // this.$store.dispatch('timeclocks/setClocks', null)
-        this.$router.replace("/auth/signIn")
-      } catch (err) {
-        console.log(err)
-        console.log(err)
-        this.fireNotify(this.error)
-      }
+  computed: {
+    // ...mapGetters({
+    //    messaging
+    // }),
+    message() {
+      return this.$store.state.common.message
     },
-
-    alert() {
-      // alert('Clicked on alert icon');
+  },
+  created() {
+    this.$mobile = true
+    var isLookBehindSupported = false
+    /* eslint-disable-next-line */
+    try {
+      isLookBehindSupported = !!new RegExp('(?<=)')
+    } catch (e) {
+      console.log('mobile')
+    this.$mobile = true
+      window.localStorage.setItem('deviceId', Android.getidInfo())
+      this.$mobile = true
     }
-  }
+    if (isLookBehindSupported) {
+      console.log('not mobile')
+    this.$mobile = false
+      window.localStorage.setItem('deviceId', 'desktop')
+    } else {
+      console.log('mobile2')
+      this.$mobile = true
+      window.localStorage.setItem('deviceId', Android.getidInfo())
+    }
+  },
+  methods: {
+    alert() {
+      // alert('Clicked on alert icon')
+    },
+  },
 }
 </script>
 
-<style lang="stylus" scoped>
-.speed-dial--bottom:not(.speed-dial--absolute) {
-  bottom: 40%;
-  right: 5px;
-}
-
-.fab {
-  bottom: 24px;
-  right: 5px;
-}
-
-.vue-notification {
-  padding: 10px;
-  margin: 0 5px 5px;
-  width: 100%;
-  font-size: 14px;
-  color: #ffffff;
-  background: #44a4fc;
-  border-left: 5px solid #187fe7;
-
-  &.warn {
-    background: #ffb648;
-    border-left-color: #f48a06;
+  <style lang='stylus'>
+  .body {
+    height: 100vh;
+    background-color: #35495e;
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
   }
 
-  &.error {
-    background: #e54d42;
-    border-left-color: #b82e24;
+  .application--wrap {
+    background-color: #35495e;
   }
 
-  &.success {
-    background: #68cd86;
-    border-left-color: #42a85f;
+  .speed-dial--bottom:not(.speed-dial--absolute) {
+    bottom: 40%;
+    right: 5px;
   }
-}
 
-.fab {
-  bottom: 24px;
-  right: 5px;
-}
+  .fab {
+    bottom: 24px;
+    right: 5px;
+  }
 
-.v-container {
-  background-color: #f8f8f8;
-}
+  .vue-notification {
+    padding: 10px;
+    margin: 0 5px 5px;
+    width: 100%;
+    font-size: 14px;
+    color: #ffffff;
+    background: #44a4fc;
+    border-left: 5px solid #187fe7;
 
-.app {
-  font-size: 16px;
-}
+    &.warn {
+      background: #ffb648;
+      border-left-color: #f48a06;
+    }
+
+    &.error {
+      background: #e54d42;
+      border-left-color: #b82e24;
+    }
+
+    &.success {
+      background: #68cd86;
+      border-left-color: #42a85f;
+    }
+  }
+
+  .fab {
+    bottom: 24px;
+    right: 5px;
+  }
+
+  .v-content {
+    height: 100vh;
+  }
+
+  .app {
+    height: 100vh;
+    background: #fafafa;
+    font-size: 16px;
+  }
 </style>

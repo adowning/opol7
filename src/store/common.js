@@ -2,10 +2,11 @@ export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 export const SET_USER = 'SET_USER'
 export const SET_ISLOGGEDIN = 'SET_ISLOGGEDIN'
 // import firebase from './firebaseInit'
-import * as db from '../firebase'
-const firebase = db.fb
+// import * as db from './firebase'
+import store from './store'
+// const firebase = db.fb
 // import firebase from 'firebase'
-import Firebase from 'firebase'
+// import Firebase from './firebase'
 // initial state
 const state = {
   message: {
@@ -40,7 +41,7 @@ const mutations = {
 }
 // actions
 function setupUser() {
-  var user = firebase.auth().currentUser
+  var user = store.state.firebase.auth().currentUser
 
   user
     .updateProfile({
@@ -73,13 +74,17 @@ const actions = {
 
       // since I can connect from multiple devices or browser tabs, we store each connection instance separately
       // any time that connectionsRef's value is null (i.e. has no children) I am offline
-      var myConnectionsRef = firebase.database().ref('users/joe/connections')
+      var myConnectionsRef = store.state.firebase
+        .database()
+        .ref('users/joe/connections')
 
       // stores the timestamp of my last disconnect (the last time I was seen online)
-      var lastOnlineRef = firebase.database().ref('users/joe/lastOnline')
+      var lastOnlineRef = store.state.firebase
+        .database()
+        .ref('users/joe/lastOnline')
 
-      var connectedRef = firebase.database().ref('.info/connected')
-      console.log(Firebase.database.ServerValue.TIMESTAMP)
+      var connectedRef = store.state.firebase.database().ref('.info/connected')
+      console.log(store.state.database.ServerValue.TIMESTAMP)
 
       connectedRef.on('value', function(snap) {
         if (snap.val() === true) {
@@ -95,7 +100,7 @@ const actions = {
           // When I disconnect, update the last time I was seen online
           lastOnlineRef
             .onDisconnect()
-            .set(Firebase.database.ServerValue.TIMESTAMP)
+            .set(store.state.database.ServerValue.TIMESTAMP)
         }
       })
       //   var isOnlineForDatabase = {

@@ -7,7 +7,8 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "prepare": "babel ./lib/*.es7 --retain-lines -d ./"
   },
   "dependencies": {
     "algoliasearch": "^3.24.5",
@@ -15,11 +16,16 @@
     "express": "^4.16.2",
     "firebase-admin": "~5.12.1",
     "firebase-functions": "^1.0.3",
-    "winston": "^3.0.0"
+    "winston": "^3.0.0",
+    "babel-runtime": "^6.23.0"
   },
   "devDependencies": {
-    "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint-plugin-promise": "^3.6.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint": "^4.13.1"
   },
   "private": true
 }

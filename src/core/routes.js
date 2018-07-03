@@ -11,9 +11,10 @@ import Auth from './Auth'
 // import NewHardware from '../modules/equipment/FormHardware'
 import Hardware from '../modules/equipment/hardware/Hardware'
 import NewHardware from '../modules/equipment/hardware/NewHardware'
+import CrewList from '../modules/people/CrewList'
 import EditHardware from '../modules/equipment/hardware/EditHardware'
 import Profile from '../modules/people/Profile'
-import store from './store'
+import store from '../store/store'
 
 Vue.use(Router)
 let router = new Router({
@@ -23,6 +24,11 @@ let router = new Router({
       path: '/',
       name: 'landing',
       component: Home,
+    },
+    {
+      path: '/crewlist',
+      name: 'CrewList',
+      component: CrewList,
     },
     {
       path: '/hardware',

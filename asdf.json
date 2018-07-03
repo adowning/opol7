@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "localId": "EojUerbMy4Nigzit4FO3gjoEpfy2",
+      "email": "ashdowning@gmail.com",
+      "emailVerified": false,
+      "displayName": "Ash Downing",
+      "photoUrl": "https://groiupandrews.com/profiles/pictures/1.jpg",
+      "lastSignedInAt": "1529763634000",
+      "createdAt": "1529346671000",
+      "custom1": "asdf",
+      "providerUserInfo": []
+    }
+  ]
+}
+[
+
+{
+position:  
+ { time: 1529793400940,
+  loc: {
+  latitude: 32.3173105,
+  longitude: -95.2474676
+},
+trackId: servergenerated when userlist changes, 
+tabletId: IMEI manually written down? ,
+userList: {uid, uid, uid}
+ }
+
+reporting tablets should always have a trackid with or with or without user and if they are at home just update last report time, break down all firestore
+logs by tablet 
+
+
+

@@ -5,12 +5,14 @@ import '../assets/stylus/vueify.styl'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#42B983',
-    // secondary: '#212121',
-    secondary: '#82B1FF',
-    accent: '#82B1FF',
-    error: '#FF5252',
-    info: '#2196F3',
+    primary: '#41b883',
+    secondary: '#0092db',
+    vueorange: 'e96900',
+    vuepurple: 'ae81ff',
+    vueblue: '0092db',
+    accent: '#8c9eff',
+    error: '#b71c1c',
+    info: '#0092db',
     success: '#4CAF50',
     warning: '#FFC107',
   },
